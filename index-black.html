@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star - Operating System Concept</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+			background-image: url('mathieu-odin-Y4wbSPSxf_M-unsplash.jpg'); /* URL de la imagen de fondo */
+			background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+			background-position: center; /* Centra la imagen de fondo */
+			background-repeat: no-repeat; /* Evita que la imagen se repita */
+			font-family: Arial, sans-serif;
+			cursor: url('cursor.png'), auto;
+        }
+
+        .dock {
+            position: fixed;
+            top: 10px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 10px;
+            background: rgba(55, 55, 55, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+			/*background: linear-gradient(to right, rgba(0, 161, 254, 0.5), rgba(201, 27, 224, 0.5), rgba(237, 35, 13, 0.5), rgba(238, 220, 10, 0.5), rgba(96, 216, 56, 0.5)); /* Degradado con transparencia */
+			height:30px;
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+        }
+
+        .dock-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: -30px 10px;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .dock-item img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .dock-item span {
+            margin-top: 8px;
+            font-size: 14px;
+            opacity: 0;
+			text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+        }
+
+        .dock-item:hover img {
+            transform: scale(1.2);
+		    transition: transform 0.3s ease-in-out;
+        }
+
+        .dock-item:hover span {
+            opacity: 1;
+        }
+
+        .window {
+            position: absolute;
+            width: 650px;
+			height:450px;
+            background: #333;
+            border-radius: 20px;
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+		
+		.window p {
+			color: #aaa;
+			text-align: center;
+			display: none;
+		}
+		
+		.bar {
+            position: fixed;
+            bottom: 0px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            /*padding: 10px;*/
+            background: rgba(55, 55, 55, 0.3);
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+			/*background: linear-gradient(to right, rgba(0, 161, 254, 0.5), rgba(201, 27, 224, 0.5), rgba(237, 35, 13, 0.5), rgba(238, 220, 10, 0.5), rgba(96, 216, 56, 0.5)); /* Degradado con transparencia */
+			height:28px;
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+			width:100%;
+		}
+		
+		.clock {
+			font-size: 0.8em;
+			color: #fff;
+			position: absolute;
+			text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); /* Ajusta la sombra según sea necesario */
+			left: 25px;
+			bottom: 6px;
+		}
+		
+		.settings {
+			position: absolute;
+			right: 25px;
+			bottom: 0px;
+		}
+		
+		.settings img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		.contactme {
+			position: absolute;
+			right: 70px;
+			bottom: 0px;
+		}
+		
+		.contactme img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		.phone {
+			position: absolute;
+			right: 115px;
+			bottom: 0px;
+		}
+		
+		.phone img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		.mail {
+			position: absolute;
+			right: 160px;
+			bottom: 0px;
+		}
+		
+		.mail img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		.paperbin {
+			position: absolute;
+			right: 205px;
+			bottom: 0px;
+		}
+		
+		.paperbin img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		#app1 {
+	        width: 750px;  /* Ancho del cuadrado */
+	        height: 500px; /* Altura del cuadrado */
+	        background: linear-gradient(to right, #333 0%, #333 25%, rgba(55, 55, 55, 0.25) 25%);
+			position: absolute; /* Necesario para moverlo */
+			text-align: center;
+			border-radius: 20px; /* Radio de las esquinas redondeadas */
+			box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Sombra */
+			z-index: 0; /* Asegura que el elemento esté encima de otros elementos */
+			transition: transform 0.5s ease-out, opacity 0.5s ease-out, width 0.5s, height 0.5s; /* Transición para suavizar el cambio */
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */		
+	    }
+		
+		#app2 {
+	        width: 900px;  /* Ancho del cuadrado */
+	        height: 550px; /* Altura del cuadrado */
+	        /*background: linear-gradient(to right, #fff 0%, #fff 25%, rgba(255, 255, 255, 0.25) 25%);*/
+			position: absolute; /* Necesario para moverlo */
+			text-align: center;
+			border-radius: 20px; /* Radio de las esquinas redondeadas */
+			box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Sombra */
+			z-index: 0; /* Asegura que el elemento esté encima de otros elementos */
+			transition: transform 0.5s ease-out, opacity 0.5s ease-out, width 0.5s, height 0.5s; /* Transición para suavizar el cambio */
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */		
+            background: #333;
+            overflow: hidden;
+		}
+    </style>
+</head>
+<body>
+<div class="dock">
+    <div class="dock-item" data-window="app1">
+        <img src="icon1.png" alt="App 1">
+		<span>Walk</span>
+    </div>
+    <div class="dock-item" data-window="app2">
+        <img src="icon2.png" alt="App 2">
+		<span>Whale</span>
+    </div>
+    <div class="dock-item" data-window="app3">
+        <img src="icon3.png" alt="App 3">
+		<span>App 3</span>
+    </div>
+    <div class="dock-item" data-window="app4">
+        <img src="icon4.png" alt="App 4">
+		<span>App 4</span>
+    </div>
+    <div class="dock-item" data-window="app5">
+        <img src="icon5.png" alt="App 5">
+		<span>App 5</span>
+    </div>
+    <div class="dock-item" data-window="app6">
+        <img src="icon6.png" alt="App 6">
+		<span>App 6</span>
+    </div>
+    <div class="dock-item" data-window="app7">
+        <img src="icon7.png" alt="App 7">
+		<span>App 7</span>
+    </div>
+    <div class="dock-item" data-window="app8">
+        <img src="icon8.png" alt="App 8">
+		<span>App 8</span>
+    </div>
+    <div class="dock-item" data-window="app9">
+        <img src="icon9.png" alt="App 9">
+		<span>App 9</span>
+    </div>
+    <div class="dock-item" data-window="app10">
+        <img src="icon10.png" alt="App 10">
+		<span>App 10</span>
+    </div>
+    <div class="dock-item" data-window="app11">
+        <img src="icon11.png" alt="App 11">
+		<span>App 11</span>
+    </div>
+    <div class="dock-item" data-window="app12">
+        <img src="icon12.png" alt="App 12">
+		<span>App 12</span>
+    </div>
+    <div class="dock-item" data-window="app13">
+        <img src="icon13.png" alt="App 13">
+		<span>App 13</span>
+    </div>
+    <div class="dock-item" data-window="app14">
+        <img src="icon14.png" alt="App 14">
+		<span>App 14</span>
+    </div>
+    <div class="dock-item" data-window="app15">
+        <img src="icon15.png" alt="App 15">
+		<span>App 15</span>
+    </div>
+    <div class="dock-item" data-window="app16">
+        <img src="icon16.png" alt="App 16">
+		<span>App 16</span>
+    </div>
+    <div class="dock-item" data-window="app17">
+        <img src="icon17.png" alt="App 17">
+		<span>App 17</span>
+    </div>
+	<!--
+    <div class="dock-item" data-window="app18">
+        <img src="icon18.png" alt="App 18">
+		<span>App 18</span>
+    </div>
+    <div class="dock-item" data-window="app19">
+        <img src="icon19.png" alt="App 19">
+		<span>App 19</span>
+    </div>
+    <div class="dock-item" data-window="app20">
+        <img src="icon20.png" alt="App 20">
+		<span>App 20</span>
+    </div>
+    <div class="dock-item" data-window="app21">
+        <img src="icon21.png" alt="App 21">
+		<span>App 21</span>
+    </div>
+		-->
+</div>
+
+<!-- Ventanas -->
+<div id="app1" class="window">
+	<p></p>
+</div>
+
+<div id="app2" class="window">
+</div>
+
+<div id="app3" class="window">
+	<p>App 3</p>
+</div>
+
+<div id="app4" class="window">
+	<p>App 4</p>
+</div>
+
+<!-- Barra -->
+<div class="bar">
+	<div class="clock" id="clock"></div>
+	<div class="settings">
+		<img src="setting.png">
+	</div>
+	<div class="contactme">
+		<img src="contact.png">
+	</div>
+	<div class="phone">
+		<img src="phone.png">
+	</div>
+	<div class="mail">
+		<img src="mail.png">
+	</div>
+	<div class="paperbin">
+		<img src="bin.png">
+	</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dockItems = document.querySelectorAll('.dock-item');
+        const windows = document.querySelectorAll('.window');
+        //const closeButtons = document.querySelectorAll('.close-button');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+		
+		windows.forEach(win => {
+		        win.addEventListener('click', function() {
+		            // Incrementar el z-index y aplicarlo a la ventana seleccionada
+		            highestZIndex++;
+		            win.style.zIndex = highestZIndex;
+		        });
+		    });
+
+        let dragWindow = null;
+        let offsetX = 0;
+        let offsetY = 0;
+		let highestZIndex = 1000; // Puedes empezar desde 1000 o cualquier otro valor alto
+
+        // Mostrar ventana al hacer clic en el ícono del dock
+        dockItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-window');
+                const targetWindow = document.getElementById(targetId);
+                targetWindow.style.display = 'block'; // Mostrar la ventana correspondiente
+				
+            });
+        });
+
+
+
+
+        // Minimizar ventana con doble click sobre la ventana
+		windows.forEach(win => {
+		    win.addEventListener('dblclick', function() {
+		        win.style.display = 'none'; // Hide the current window on double-click
+		    });
+		});
+		
+        
+		
+
+		// Arrastrar ventanas con Pointer Events
+		windows.forEach(win => {
+		    // Eliminar selección de .window-header y agregar eventos directamente a la ventana .window
+
+		    win.addEventListener('pointerdown', function(event) {
+		        event.preventDefault(); // Prevenir comportamiento por defecto que pueda causar problemas
+
+		        dragWindow = win;
+
+		        // Calcular el offset en el momento exacto en que se comienza a arrastrar
+		        const rect = win.getBoundingClientRect();
+		        offsetX = event.clientX - rect.left;
+		        offsetY = event.clientY - rect.top;
+
+		        document.addEventListener('pointermove', onPointerMove);
+		        document.addEventListener('pointerup', onPointerUp);
+		    });
+
+		    function onPointerMove(event) {
+		        if (dragWindow) {
+		            // Calcular nueva posición
+		            const newLeft = event.clientX - offsetX;
+		            const newTop = event.clientY - offsetY;
+
+		            // Aplicar nueva posición
+		            dragWindow.style.left = `${newLeft}px`;
+		            dragWindow.style.top = `${newTop}px`;
+		        }
+		    }
+
+		    function onPointerUp() {
+		        if (dragWindow) {
+		            dragWindow = null;
+		            document.removeEventListener('pointermove', onPointerMove);
+		            document.removeEventListener('pointerup', onPointerUp);
+		        }
+		    }
+		});
+		
+		
+
+        // Detectar el uso de dos dedos en el panel táctil para ajustar tamaño de ventanas
+        windows.forEach(win => {
+            let initialTouchY = null;
+
+            win.addEventListener('touchstart', function(event) {
+                if (event.touches.length === 2) {
+                    initialTouchY = Math.min(event.touches[0].clientY, event.touches[1].clientY);
+                }
+            });
+
+            win.addEventListener('touchmove', function(event) {
+                if (event.touches.length === 2 && initialTouchY !== null) {
+                    let currentTouchY = Math.min(event.touches[0].clientY, event.touches[1].clientY);
+                    if (currentTouchY > initialTouchY + 30) { // Ajusta el umbral según sea necesario
+                        // Aquí puedes realizar acciones adicionales como cambiar el tamaño de la ventana
+                        console.log("Deslizar hacia arriba con dos dedos detectado.");
+                        initialTouchY = null;
+                    }
+                }
+            });
+
+            win.addEventListener('touchend', function(event) {
+                if (event.touches.length < 2) {
+                    initialTouchY = null;
+                }
+            });
+        });
+		
+		
+		
+        // Parámetros del círculo
+        const radius = 300; // Radio del círculo
+        const centerX = window.innerWidth / 2; // Centro del círculo en el eje X
+        const centerY = window.innerHeight / 2; // Centro del círculo en el eje Y
+        const totalWindows = dockItems.length;
+
+        dockItems.forEach((item, index) => {
+            item.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-window');
+                const targetWindow = document.getElementById(targetId);
+
+                // Calcular la posición en el círculo
+                const angle = (index / totalWindows) * 2 * Math.PI; // Ángulo para cada ventana
+                const left = centerX + radius * Math.cos(angle) - targetWindow.offsetWidth / 2;
+                const top = centerY + radius * Math.sin(angle) - targetWindow.offsetHeight / 2;
+
+                // Mostrar la ventana en la posición calculada
+                targetWindow.style.display = 'block';
+                targetWindow.style.left = `${left}px`;
+                targetWindow.style.top = `${top}px`;
+            });
+        });
+		
+		
+		
+		// Reloj
+ 		function mostrarFechaHora() {
+			const fechaElement = document.getElementById('clock');
+ 		    const opcionesFecha = {
+				weekday: 'short',  // Nombre completo del día de la semana
+				day: 'numeric',   // Día del mes
+				month: 'short',    // Nombre completo del mes
+				// year: 'numeric'   // Año en formato numérico
+ 		   };
+		   const opcionesHora = {
+			   hour: '2-digit',  // Hora en formato de dos dígitos
+			   minute: '2-digit', // Minuto en formato de dos dígitos
+ 			  //  second: '2-digit', // Segundo en formato de dos dígitos (opcional)
+			   hour12: false     // Usa el formato de 24 horas
+		   };
+		   const fechaActual = new Date();
+		   const fechaFormateada = fechaActual.toLocaleDateString('en-US', opcionesFecha);
+		   const horaFormateada = fechaActual.toLocaleTimeString('en-US', opcionesHora);
+		   fechaElement.textContent = `${fechaFormateada}, ${horaFormateada}`;
+		   }
+
+ 		  // Actualiza la fecha y hora cada segundo
+		   setInterval(mostrarFechaHora, 1000);
+		   // Inicializa la fecha y hora cuando la página se carga
+ 		  window.onload = mostrarFechaHora;  
+    });
+</script>
+	
+
+</body>
+</html>

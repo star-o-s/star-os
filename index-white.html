@@ -14,7 +14,7 @@
             align-items: center;
             justify-content: center;
             background-color: #f0f0f0;
-			background-image: url('elina-emurlaeva-qwYp4WOVebI-unsplash.jpg'); /* URL de la imagen de fondo */
+			background-image: url('2560x1600.png'); /* URL de la imagen de fondo */
 			background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
 			background-position: center; /* Centra la imagen de fondo */
 			background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -357,14 +357,15 @@
             });
         });
 
-        // Minimizar ventana con la rueda del ratón
-        windows.forEach(win => {
-            win.addEventListener('wheel', function(event) {
-                if (event.deltaY < 0) {
-                    win.style.display = 'none'; // Ocultar la ventana actual
-                }
-            });
-        });
+
+
+
+        // Minimizar ventana con doble click sobre la ventana
+		windows.forEach(win => {
+		    win.addEventListener('dblclick', function() {
+		        win.style.display = 'none'; // Hide the current window on double-click
+		    });
+		});
 		
         
 		

@@ -37,6 +37,7 @@
 			height:30px;
 			backdrop-filter: blur(5px); /* Desenfoque del fondo */
 		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+			width: 85%;
         }
 
         .dock-item {
@@ -90,7 +91,7 @@
 		
 		.bar {
             position: fixed;
-            bottom: 0px;
+            bottom: 15px;
             display: flex;
             align-items: flex-end;
             justify-content: center;
@@ -99,10 +100,11 @@
             box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
             z-index: 2000;
 			/*background: linear-gradient(to right, rgba(0, 161, 254, 0.5), rgba(201, 27, 224, 0.5), rgba(237, 35, 13, 0.5), rgba(238, 220, 10, 0.5), rgba(96, 216, 56, 0.5)); /* Degradado con transparencia */
-			height:28px;
+			height:32px;
 			backdrop-filter: blur(5px); /* Desenfoque del fondo */
 		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
-			width:100%;
+			width:50%;
+			border-radius: 10px;
 		}
 		
 		.clock {
@@ -111,13 +113,13 @@
 			position: absolute;
 			text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); /* Ajusta la sombra según sea necesario */
 			left: 25px;
-			bottom: 6.5px;
+			bottom: 8px;
 		}
 		
 		.settings {
 			position: absolute;
 			right: 25px;
-			bottom: 1px;
+			bottom: 2px;
 		}
 		
 		.settings img {
@@ -127,8 +129,8 @@
 		
 		.contactme {
 			position: absolute;
-			right: 70px;
-			bottom: 1px;
+			right: 65px;
+			bottom: 2px;
 		}
 		
 		.contactme img {
@@ -138,8 +140,8 @@
 		
 		.phone {
 			position: absolute;
-			right: 115px;
-			bottom: 1px;
+			right: 105px;
+			bottom: 2px;
 		}
 		
 		.phone img {
@@ -149,8 +151,8 @@
 		
 		.mail {
 			position: absolute;
-			right: 160px;
-			bottom: 1px;
+			right: 145px;
+			bottom: 2px;
 		}
 		
 		.mail img {
@@ -160,8 +162,8 @@
 		
 		.paperbin {
 			position: absolute;
-			right: 205px;
-			bottom: 1px;
+			right: 185px;
+			bottom: 2px;
 		}
 		
 		.paperbin img {

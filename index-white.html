@@ -14,7 +14,7 @@
             align-items: center;
             justify-content: center;
             background-color: #f0f0f0;
-			background-image: url('plufow-le-studio-0mZoOEL8M6s-unsplash.jpg'); /* URL de la imagen de fondo */
+			background-image: url('nenad-novakovic-mvG5WDANqPw-unsplash.jpg'); /* URL de la imagen de fondo */
 			background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
 			background-position: center; /* Centra la imagen de fondo */
 			background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -174,7 +174,7 @@
 		}
 		
 		#app1 {
-	        width: 600px;  /* Ancho del cuadrado */
+	        width: 550px;  /* Ancho del cuadrado */
 	        height: 350px; /* Altura del cuadrado */
 	       /* background: linear-gradient(to right, #393939 0%, #393939 25%, rgba(57, 57, 57, 0.25) 25%);*/
 			background-color: #f1f1f1;
@@ -204,7 +204,7 @@
             overflow: hidden;
 		}
 		
-		.left {
+		.explorer-left {
 			text-align: left;
 			color: #929292;
 			font-size: 11px;
@@ -213,28 +213,28 @@
 			display: flex;
 			  flex-direction: column;
 			  gap: 10px; /* Espacio entre filas */
-			  padding: 5px;
+			  padding: 0px;
   			position: relative;
-  			  top: 15px;   /* Mueve el div hacia abajo */
+  			  top: 8px;   /* Mueve el div hacia abajo */
 		}
-		.left img {
+		.explorer-left img {
 			width: 20px;
 			height: 20px;
 			 
 		}
-		.left div:hover {
+		.explorer-left div:hover {
 			background-color: #D5D5D5;
-			padding: 5px;
+			padding: 5px 115px 5px 5px;
 			border-radius: 8px; /* Radio de las esquinas redondeadas */
 		}
 
-		.left div {
+		.explorer-left div {
 		  display: flex;
 		  align-items: center; /* Alinea verticalmente */
 		  gap: 10px; /* Espacio entre imagen y texto */
 		  padding: 5px;
 		}
-		.right {
+		.explorer-right {
 			position: relative;
 			  top: -170px;   /* Mueve el div hacia abajo */
 			  left: 165px;  /* Mueve el div hacia la derecha */
@@ -247,18 +247,18 @@
 	  	  
 		}
 		
-		.right img {
-			width: 45px;
+		.explorer-right img {
+			width: 26px;
 			display: block;
-			  margin: 7px; /* Centrar la imagen */
+			  margin: 9px; /* Centrar la imagen */
 			 
 			  
 		}
-		.right div {
+		.explorer-right div {
 			padding: 5px;
 		}
 		
-		.right .seleccion:hover {
+		.explorer-right .seleccion:hover {
 			background-color: #D5D5D5;
 			color: #959595;
 			padding: 5px;
@@ -345,13 +345,13 @@
 	<p>App 1</p>
 	
 	<div class="">
-		<div class="left">
+		<div class="explorer-left">
 			<div class="download"><img src="explorer-icono-all-blue.png">All</div>
 			<div class="images"><img src="explorer-icono-images-blue.png">Images</div>
 			<div class="video"><img src="explorer-icono-video-blue.png">Video</div>
 			<div class="music"><img src="explorer-icono-music-blue.png">Music</div>
 		</div>
-		<div class="right">
+		<div class="explorer-right">
 			<div class="archivo">
 				<div class="seleccion">
 					<img src="icono-music-blue2.png">Lady Gaga
@@ -377,7 +377,7 @@
 					<img src="icono-music-blue2.png">Beyoncé
 				</div>
 			</div>
-		
+			
 		</div>
 	</div>
 	

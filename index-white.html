@@ -224,6 +224,7 @@
 		}
 		.explorer-left div:hover {
 			background-color: #D5D5D5;
+			color: #929292;
 			padding: 5px 115px 5px 5px;
 			border-radius: 8px; /* Radio de las esquinas redondeadas */
 		}
@@ -260,12 +261,66 @@
 		
 		.explorer-right .seleccion:hover {
 			background-color: #D5D5D5;
-			color: #959595;
+			color: #929292;
 			padding: 6px;
 			border-radius: 8px; /* Radio de las esquinas redondeadas */
 			
 		}
-		
+		/*
+		.explorer-search {
+			background-color: #d5d5d5;
+			width: 120px;
+			height: 22px;
+			color: #fff;
+			position: relative;
+			  top: 10px;   /* Mueve el div hacia abajo */
+		/*	  left: 165px;  /* Mueve el div hacia la derecha */
+		/*	  border-radius: 8px; /* Radio de las esquinas redondeadas */
+		/*	  font-size: 12px;
+			  padding: 4px;
+	  		  display: flex;
+	  		  align-items: center; /* Alinea verticalmente */
+	  		  /*gap: 10px; /* Espacio entre imagen y texto */
+		/*		text-align: left;
+				
+			
+		}*/
+		.explorer-search img {
+			width: 26px;
+			position: relative;
+			  top: 52px;   /* Mueve el div hacia abajo */
+			  left: 235px;  /* Mueve el div hacia la derecha */
+		}
+		.explorer-tab img {
+			width: 26px;
+			position: relative;
+			  top: 52px;   /* Mueve el div hacia abajo */
+			  left: 235px;  /* Mueve el div hacia la derecha */
+		}
+		.explorer-option {
+			position: relative;
+			  top: 52px;   /* Mueve el div hacia abajo */
+			  left: -200px;  /* Mueve el div hacia la derecha */
+		}
+		.explorer-option img {
+			width: 26px;
+		}
+		.bar-search {
+			background-color: #d5d5d5;
+			width: 225px;
+			height: 22px;
+			color: #f1f1f1;
+			position: relative;
+			  top: 20px;   /* Mueve el div hacia abajo */
+			  left: 160px;  /* Mueve el div hacia la derecha */
+			  border-radius: 8px; /* Radio de las esquinas redondeadas */
+			  font-size: 12px;
+			  padding: 3px;
+	  		  display: flex;
+	  		  align-items: center; /* Alinea verticalmente */
+	  		  /*gap: 10px; /* Espacio entre imagen y texto */
+				
+		}
     </style>
 </head>
 <body>
@@ -380,7 +435,16 @@
 			
 		</div>
 	</div>
-	
+	<div class="explorer-option">
+		<img src="icono-atras.png">
+		<img src="icono-delante.png">
+		
+		<img src="tab.png">
+		<img src="search.png">
+	</div>
+	<!--<div class="bar-search"></div>-->
+	<!--<div class="explorer-search"><img src="search.png"></div>
+	<div class="explorer-tab"><img src=tab.png></div>-->
 </div>
 
 <div id="app2" class="window">

@@ -86,7 +86,7 @@
 		.window p {
 			color: #505050;
 			text-align: center;
-			/*display: none;*/
+			display: none;
 			font-size: 12px;
 			 font-weight: bold;
 		}
@@ -174,10 +174,10 @@
 		}
 		
 		#app1 {
-	        width: 550px;  /* Ancho del cuadrado */
+	        width: 600px;  /* Ancho del cuadrado */
 	        height: 350px; /* Altura del cuadrado */
-	        background: linear-gradient(to right, #f1f1f1 0%, #f1f1f1 25%, rgba(215, 215, 215, 0.25) 25%);*/
-			/*background-color: #f1f1f1;
+	       /* background: linear-gradient(to right, #393939 0%, #393939 25%, rgba(57, 57, 57, 0.25) 25%);*/
+			background-color: #393939;
 			position: absolute; /* Necesario para moverlo */
 			text-align: center;
 			border-radius: 25px; /* Radio de las esquinas redondeadas */
@@ -203,7 +203,7 @@
             background: #f1f1f1;
             overflow: hidden;
 		}
-		/*
+		
 		.left {
 			text-align: left;
 			color: #d5d5d5;
@@ -213,7 +213,9 @@
 			display: flex;
 			  flex-direction: column;
 			  gap: 10px; /* Espacio entre filas */
-	/*		  padding: 5px;
+			  padding: 5px;
+  			position: relative;
+  			  top: 15px;   /* Mueve el div hacia abajo */
 		}
 		.left img {
 			width: 20px;
@@ -223,15 +225,46 @@
 		.left div:hover {
 			background-color: gray;
 			padding: 5px;
-			border-radius: 5px; /* Radio de las esquinas redondeadas */
-	/*	}
+			border-radius: 4px; /* Radio de las esquinas redondeadas */
+		}
 
 		.left div {
 		  display: flex;
 		  align-items: center; /* Alinea verticalmente */
-	/*	  gap: 10px; /* Espacio entre imagen y texto */
-	/*	  padding: 5px;
-		}*/
+		  gap: 10px; /* Espacio entre imagen y texto */
+		  padding: 5px;
+		}
+		.right {
+			position: relative;
+			  top: -170px;   /* Mueve el div hacia abajo */
+			  left: 150px;  /* Mueve el div hacia la derecha */
+			color: #d5d5d5;
+			font-size: 9px;
+  		  display: flex;
+  		  align-items: center; /* Alinea verticalmente */
+  		  /*gap: 10px; /* Espacio entre imagen y texto */
+			text-align: center;
+	  	  
+		}
+		
+		.right img {
+			width: 45px;
+			display: block;
+			  margin: 7px; /* Centrar la imagen */
+			 
+			  
+		}
+		.right div {
+			padding: 5px;
+		}
+		
+		.right .seleccion:hover {
+			background-color: gray;
+			padding: 5px;
+			border-radius: 4px; /* Radio de las esquinas redondeadas */
+			
+		}
+		
     </style>
 </head>
 <body>
@@ -309,20 +342,44 @@
 <!-- Ventanas -->
 <div id="app1" class="window">
 	<p>App 1</p>
-	<!--
+	
 	<div class="">
 		<div class="left">
-			<div class="download"><img src="explorer-icono-download.png">Download</div>
+			<div class="download"><img src="explorer-icono-all.png">All</div>
 			<div class="images"><img src="explorer-icono-images.png">Images</div>
 			<div class="video"><img src="explorer-icono-video.png">Video</div>
 			<div class="music"><img src="explorer-icono-music.png">Music</div>
 		</div>
 		<div class="right">
-			<h1></h1>
-			
+			<div class="archivo">
+				<div class="seleccion">
+					<img src="icono-music.png">Lady Gaga
+				</div>
+			</div>
+			<div class="archivo">
+				<div class="seleccion">
+					<img src="icono-music.png">Katy Perry
+				</div>
+			</div>
+			<div class="archivo">
+				<div class="seleccion">
+					<img src="icono-music.png">Bruno Mars
+				</div>
+			</div>
+			<div class="archivo">
+				<div class="seleccion">
+					<img src="icono-music.png">Rihanna
+				</div>
+			</div>
+			<div class="archivo">
+				<div class="seleccion">
+					<img src="icono-music.png">Beyoncé
+				</div>
+			</div>
+		
 		</div>
 	</div>
-		-->
+	
 </div>
 
 <div id="app2" class="window">

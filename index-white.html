@@ -73,8 +73,8 @@
 
         .window {
             position: absolute;
-            width: 650px;
-			height:450px;
+            width: 550px;
+			height:350px;
             background: #f1f1f1;
             border-radius: 20px;
             box-shadow: 0 0px 15px rgba(0, 0, 0, 0.3);
@@ -84,9 +84,11 @@
         }
 		
 		.window p {
-			color: #aaa;
+			color: #505050;
 			text-align: center;
-			display: none;
+			/*display: none;*/
+			font-size: 12px;
+			 font-weight: bold;
 		}
 		
 		.bar {
@@ -172,12 +174,13 @@
 		}
 		
 		#app1 {
-	        width: 750px;  /* Ancho del cuadrado */
-	        height: 500px; /* Altura del cuadrado */
-	        background: linear-gradient(to right, #f1f1f1 0%, #f1f1f1 25%, rgba(215, 215, 215, 0.25) 25%);
+	        width: 550px;  /* Ancho del cuadrado */
+	        height: 350px; /* Altura del cuadrado */
+	        background: linear-gradient(to right, #f1f1f1 0%, #f1f1f1 25%, rgba(215, 215, 215, 0.25) 25%);*/
+			/*background-color: #f1f1f1;
 			position: absolute; /* Necesario para moverlo */
 			text-align: center;
-			border-radius: 20px; /* Radio de las esquinas redondeadas */
+			border-radius: 25px; /* Radio de las esquinas redondeadas */
 			box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Sombra */
 			z-index: 0; /* Asegura que el elemento esté encima de otros elementos */
 			transition: transform 0.5s ease-out, opacity 0.5s ease-out, width 0.5s, height 0.5s; /* Transición para suavizar el cambio */
@@ -186,8 +189,8 @@
 	    }
 		
 		#app2 {
-	        width: 900px;  /* Ancho del cuadrado */
-	        height: 550px; /* Altura del cuadrado */
+	        width: 750px;  /* Ancho del cuadrado */
+	        height: 400px; /* Altura del cuadrado */
 	        /*background: linear-gradient(to right, #fff 0%, #fff 25%, rgba(255, 255, 255, 0.25) 25%);*/
 			position: absolute; /* Necesario para moverlo */
 			text-align: center;
@@ -200,17 +203,46 @@
             background: #f1f1f1;
             overflow: hidden;
 		}
+		/*
+		.left {
+			text-align: left;
+			color: #d5d5d5;
+			font-size: 11px;
+			margin: 15px;
+			width: 95px;
+			display: flex;
+			  flex-direction: column;
+			  gap: 10px; /* Espacio entre filas */
+	/*		  padding: 5px;
+		}
+		.left img {
+			width: 20px;
+			height: 20px;
+			 
+		}
+		.left div:hover {
+			background-color: gray;
+			padding: 5px;
+			border-radius: 5px; /* Radio de las esquinas redondeadas */
+	/*	}
+
+		.left div {
+		  display: flex;
+		  align-items: center; /* Alinea verticalmente */
+	/*	  gap: 10px; /* Espacio entre imagen y texto */
+	/*	  padding: 5px;
+		}*/
     </style>
 </head>
 <body>
 <div class="dock">
     <div class="dock-item" data-window="app1">
         <img src="icon1.png" alt="App 1">
-		<span>Walk</span>
+		<span>App 1</span>
     </div>
     <div class="dock-item" data-window="app2">
         <img src="icon2.png" alt="App 2">
-		<span>Whale</span>
+		<span>App 2</span>
     </div>
     <div class="dock-item" data-window="app3">
         <img src="icon3.png" alt="App 3">
@@ -272,33 +304,29 @@
         <img src="icon17.png" alt="App 17">
 		<span>App 17</span>
     </div>
-
-	<!--
-    <div class="dock-item" data-window="app18">
-        <img src="icon18.png" alt="App 18">
-		<span>App 18</span>
-    </div>
-    <div class="dock-item" data-window="app19">
-        <img src="icon19.png" alt="App 19">
-		<span>App 19</span>
-    </div>
-    <div class="dock-item" data-window="app20">
-        <img src="icon20.png" alt="App 20">
-		<span>App 20</span>
-    </div>
-    <div class="dock-item" data-window="app21">
-        <img src="icon21.png" alt="App 21">
-		<span>App 21</span>
-    </div>
-		-->
 </div>
 
 <!-- Ventanas -->
 <div id="app1" class="window">
-	<p></p>
+	<p>App 1</p>
+	<!--
+	<div class="">
+		<div class="left">
+			<div class="download"><img src="explorer-icono-download.png">Download</div>
+			<div class="images"><img src="explorer-icono-images.png">Images</div>
+			<div class="video"><img src="explorer-icono-video.png">Video</div>
+			<div class="music"><img src="explorer-icono-music.png">Music</div>
+		</div>
+		<div class="right">
+			<h1></h1>
+			
+		</div>
+	</div>
+		-->
 </div>
 
 <div id="app2" class="window">
+	<p>App 2</p>
 </div>
 
 <div id="app3" class="window">

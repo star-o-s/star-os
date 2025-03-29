@@ -70,7 +70,13 @@
         .dock-item:hover span {
             opacity: 1;
         }
-
+		
+        .dock.active {
+            background: rgba(25, 25, 25, 0.3); /* Dark */
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+        }
+		
         .window {
             position: absolute;
             width: 550px;
@@ -81,6 +87,8 @@
             display: none;
             z-index: 1000;
             overflow: hidden;
+			
+			transition: background-color 0.5s ease;
         }
 		
 		.window p {
@@ -90,6 +98,11 @@
 			font-size: 12px;
 			 font-weight: bold;
 		}
+		
+        .window.active {
+            background-color: #555; /* Dark */
+        }
+		
 		
 		.bar {
             position: fixed;
@@ -108,6 +121,12 @@
 			width:50%;
 			border-radius: 10px;
 		}
+		
+        .bar.active {
+            background: rgba(25, 25, 25, 0.3); /* Dark */
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+        }
 		
 		.clock {
 			font-size: 0.8em;
@@ -131,7 +150,7 @@
 		
 		.contactme {
 			position: absolute;
-			right: 65px;
+			right: 185px;
 			bottom: 2px;
 		}
 		
@@ -164,7 +183,7 @@
 		
 		.paperbin {
 			position: absolute;
-			right: 185px;
+			right: 65px;
 			bottom: 2px;
 		}
 		
@@ -173,11 +192,13 @@
 			height: 20px;
 		}
 		
+       
+		
 		#app1 {
 	        width: 550px;  /* Ancho del cuadrado */
 	        height: 350px; /* Altura del cuadrado */
 	       /* background: linear-gradient(to right, #393939 0%, #393939 25%, rgba(57, 57, 57, 0.25) 25%);*/
-			background-color: #f1f1f1;
+			
 			position: absolute; /* Necesario para moverlo */
 			text-align: center;
 			border-radius: 25px; /* Radio de las esquinas redondeadas */
@@ -189,8 +210,8 @@
 	    }
 		
 		#app2 {
-	        width: 750px;  /* Ancho del cuadrado */
-	        height: 400px; /* Altura del cuadrado */
+	        width: 795px;  /* Ancho del cuadrado */
+	        height: 485px; /* Altura del cuadrado */
 	        /*background: linear-gradient(to right, #fff 0%, #fff 25%, rgba(255, 255, 255, 0.25) 25%);*/
 			position: absolute; /* Necesario para moverlo */
 			text-align: center;
@@ -200,8 +221,13 @@
 			transition: transform 0.5s ease-out, opacity 0.5s ease-out, width 0.5s, height 0.5s; /* Transición para suavizar el cambio */
 			backdrop-filter: blur(5px); /* Desenfoque del fondo */
 		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */		
-            background: #f1f1f1;
+            
             overflow: hidden;
+			background-image: url('.jpg');
+			
+			background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+			background-position: center; /* Centra la imagen de fondo */
+			background-repeat: no-repeat; /* Evita que la imagen se repita */
 		}
 		
 		.explorer-left {
@@ -321,6 +347,156 @@
 	  		  /*gap: 10px; /* Espacio entre imagen y texto */
 				
 		}
+		
+        .minimized {
+            transform: scale(0);
+            opacity: 0;
+        }
+	
+		.app1-explorer {
+			
+			position: absolute;
+			top: 7%;
+			left: 5%;
+  		  display: flex;
+  		  align-items: center; /* Alinea verticalmente */
+  		  gap: 25px; /* Espacio entre imagen y texto */
+		}
+		.app1-opcion1 {
+			background-color: #d5d5d5;
+			width: 15px;
+			height: 15px;
+			border-radius: 15px;
+		}
+		.app1-opcion2 {
+			background-color: #d5d5d5;
+			width: 15px;
+			height: 15px;
+			border-radius: 15px;
+		}
+		.app1-barra {
+			background-color: #d5d5d5;
+			width: 410px;
+			height: 25px;
+			border-radius: 15px;
+			color: white;
+			font-size: 12px;
+			position: relative;
+			top: 50%;
+		}
+		/*
+		.app1-explorer2 {
+			
+			position: absolute;
+			top: 25%;
+			left: 5%;
+  		  display: flex;
+  		  align-items: center; /* Alinea verticalmente */
+  	/*	  gap: 25px; /* Espacio entre imagen y texto */
+	/*	}
+		.app1-icono1 {
+			background-color: #d5d5d5;
+			width: 35px;
+			height: 45px;
+			border-radius: 8px;
+		}
+		.app1-icono2 {
+			background-color: #d5d5d5;
+			width: 35px;
+			height: 45px;
+			border-radius: 8px;
+		}
+		.app1-icno3 {
+			background-color: #d5d5d5;
+			width: 35px;
+			height: 45px;
+			border-radius: 8px;
+		}
+		*/
+		.app2-browser {
+			
+			position: absolute;
+			top: 45%;
+			left: 15%;
+  		  display: flex;
+  		  align-items: center; /* Alinea verticalmente */
+  		  gap: 25px; /* Espacio entre imagen y texto */
+		}
+		.app2-opcion {
+			background-color: #d5d5d5;
+			width: 25px;
+			height: 25px;
+			border-radius: 15px;
+			top: 5%;
+		}
+		.app2-barra {
+			background-color: #d5d5d5;
+			width: 520px;
+			height: 35px;
+			border-radius: 15px;
+		}
+		
+		#toggleDiv {
+		            display: none;
+		            margin-top: 20px;
+		            padding: 20px;
+		            background-color: lightgray;
+		            border-radius: 5px;
+					position: absolute;
+					  bottom: 50px;   /* Mueve el div hacia abajo */
+					  right: 5px;  /* Mueve el div hacia la derecha */
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+		        }
+				#toggleDiv.active {
+					background: rgba(25, 25, 25, 0.3);
+				}
+				
+		        button {
+		            padding: 1px 1px;
+		            font-size: 16px;
+		            border: none;
+		            border-radius: 10px;
+		            background-color: #f1f1f1;
+		            color: white;
+		            cursor: pointer;
+		            transition: background-color 0.3s;
+					width: 28px;
+					height: 16px;
+					
+					
+		        }
+		       
+				
+			    .button-active {
+			               background-color: #646464;
+						   
+			               /*transform: translateY(15px);*/
+			           }
+					   .circle {
+					               width: 12px;
+					               height: 12px;
+					               background: #646464;
+					               border-radius: 50%;
+					               position: absolute;
+					               left: 1px;
+								   top: 0px;
+					               
+					               
+					               
+					               
+					               position: relative; /* Importante para que el transform funcione */
+					               transition: transform 0.3s ease-in-out;
+					           }
+							   
+							   .circle.active {
+							       transform: translateX(12px);
+								   background: #f1f1f1;
+							   }
+					 
     </style>
 </head>
 <body>
@@ -398,7 +574,13 @@
 <!-- Ventanas -->
 <div id="app1" class="window">
 	<p>App 1</p>
+	<div class="app1-explorer">
+		<div class="app1-opcion1"></div>
+		<div class="app1-opcion2"></div>
+		<div class="app1-barra"></div>
+	</div>
 	
+	<!--
 	<div class="">
 		<div class="explorer-left">
 			<div class="download"><img src="explorer-icono-all-blue.png">All</div>
@@ -442,15 +624,21 @@
 		<img src="tab.png">
 		<img src="search.png">
 	</div>
+		-->
 	<!--<div class="bar-search"></div>-->
 	<!--<div class="explorer-search"><img src="search.png"></div>
 	<div class="explorer-tab"><img src=tab.png></div>-->
+		
 </div>
 
 <div id="app2" class="window">
 	<p>App 2</p>
+	<div class="app2-browser">
+		<div class="app2-opcion"></div>
+		<div class="app2-barra"></div>
+	</div>
 </div>
-
+<!--
 <div id="app3" class="window">
 	<p>App 3</p>
 </div>
@@ -458,25 +646,35 @@
 <div id="app4" class="window">
 	<p>App 4</p>
 </div>
-
+-->
 <!-- Barra -->
 <div class="bar">
 	<div class="clock" id="clock"></div>
-	<div class="settings">
-		<img src="setting.png">
+	<div class="options">
+	<div class="settings" onclick="toggleDiv()">
+	        <img src="setting.png">
+	    </div>
+	 <div id="toggleDiv">
+	 	<button id="colorButton">
+			<div class="circle"></div>
+		</button>
+	 </div>
 	</div>
-	<div class="contactme">
-		<img src="contact.png">
+	<!--
+	<div class="paperbin">
+		<img src="bin.png">
 	</div>
+	
 	<div class="phone">
 		<img src="phone.png">
 	</div>
 	<div class="mail">
 		<img src="mail.png">
 	</div>
-	<div class="paperbin">
-		<img src="bin.png">
+	<div class="contactme">
+		<img src="contact.png">
 	</div>
+		-->
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -509,7 +707,7 @@
             });
         });
 
-
+		
 
 
         // Minimizar ventana con doble click sobre la ventana
@@ -518,8 +716,26 @@
 		        win.style.display = 'none'; // Hide the current window on double-click
 		    });
 		});
+
+/**		
+    document.body.addEventListener("dblclick", function(event) {
+        if (event.target === document.body) {
+            document.querySelectorAll(".window").forEach(div => {
+                div.classList.toggle("minimized");
+            });
+        }
+	
+    });
+*/
+	
 		
-        
+	
+		
+		
+		
+		
+		
+		
 		
 
 		// Arrastrar ventanas con Pointer Events
@@ -644,6 +860,37 @@
 		   // Inicializa la fecha y hora cuando la página se carga
  		  window.onload = mostrarFechaHora;  
     });
+	
+	
+	//abre menu widget de configuracion
+	//widget settings
+	function toggleDiv() {
+	            var div = document.getElementById("toggleDiv");
+	            if (div.style.display === "none" || div.style.display === "") {
+	                div.style.display = "block";
+	            } else {
+	                div.style.display = "none";
+	            }
+	        }
+			
+			
+			
+			//cambiar de color dark-light
+	        const button = document.getElementById('colorButton');
+	        const boxes = document.querySelectorAll('.window, .dock, .bar, #toggleDiv');
+
+	        button.addEventListener('click', () => {
+	            boxes.forEach(box => {
+	                box.classList.toggle('active');
+	            });
+				button.classList.toggle('button-active'); // Cambia el color del botón
+	        });
+			
+			//movimiento de circle boton dark-light
+			document.getElementById("colorButton").addEventListener("click", function() {
+			    let circle = this.querySelector(".circle");
+			    circle.classList.toggle("active");
+			});
 </script>
 </body>
 </html>

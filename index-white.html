@@ -710,14 +710,27 @@
 
 		
 
-
+/**
         // Minimizar ventana con doble click sobre la ventana
 		windows.forEach(win => {
 		    win.addEventListener('dblclick', function() {
 		        win.style.display = 'none'; // Hide the current window on double-click
 		    });
 		});
-
+*/
+		//minimizar ventanas con doble clikc sobre la ventana con efecto 
+		windows.forEach(win => {
+		            win.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            
+		            win.addEventListener('dblclick', function() {
+		                win.style.opacity = '0';
+		                win.style.transform = 'scale(0.9)';
+                
+		                setTimeout(() => {
+		                    win.style.display = 'none';
+		                }, 300); // Esperar el tiempo de la transición antes de ocultar completamente
+		            });
+		        });
 /**		
     document.body.addEventListener("dblclick", function(event) {
         if (event.target === document.body) {

@@ -14,7 +14,7 @@
             align-items: center;
             justify-content: center;
             background-color: #f0f0f0;
-			background-image: url('plufow-le-studio-W2XHm45F5Oo-unsplash.jpg'); /* URL de la imagen de fondo */
+			background-image: url('nenad-novakovic-xuZTzyXCbTw-unsplash.jpg'); /* URL de la imagen de fondo */
 			background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
 			background-position: center; /* Centra la imagen de fondo */
 			background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -193,13 +193,14 @@
 			height: 20px;
 		}
 		
-       
+		
 		
 		#app1 {
 	        width: 550px;  /* Ancho del cuadrado */
 	        height: 350px; /* Altura del cuadrado */
 	       /* background: linear-gradient(to right, #393939 0%, #393939 25%, rgba(57, 57, 57, 0.25) 25%);*/
-			
+			/*background: linear-gradient(to right, #f1f1f1 0%, #f1f1f1 25%, rgba(85, 85, 85, 1) 25%);*/
+			background-color: rgba(85, 85, 85, 0.6);
 			position: absolute; /* Necesario para moverlo */
 			text-align: center;
 			border-radius: 25px; /* Radio de las esquinas redondeadas */
@@ -209,6 +210,19 @@
 			backdrop-filter: blur(5px); /* Desenfoque del fondo */
 		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */		
 	    }
+		#app1.active {
+			/*background: linear-gradient(to right, #555555 0%, #555555 25%, rgba(241, 241, 241, 1) 25%);*/
+			background-color: rgba(241, 241, 241, 0.6);
+		}
+		
+		
+		 
+		
+		  
+		
+		
+		
+		
 		
 		#app2 {
 	        width: 795px;  /* Ancho del cuadrado */
@@ -216,7 +230,7 @@
 	        /*background: linear-gradient(to right, #fff 0%, #fff 25%, rgba(255, 255, 255, 0.25) 25%);*/
 			position: absolute; /* Necesario para moverlo */
 			text-align: center;
-			border-radius: 20px; /* Radio de las esquinas redondeadas */
+			border-radius: 25px; /* Radio de las esquinas redondeadas */
 			box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Sombra */
 			z-index: 0; /* Asegura que el elemento esté encima de otros elementos */
 			transition: transform 0.5s ease-out, opacity 0.5s ease-out, width 0.5s, height 0.5s; /* Transición para suavizar el cambio */
@@ -224,7 +238,7 @@
 		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */		
             
             overflow: hidden;
-			background-image: url('.jpg');
+			background-image: url('browser-lion.pn');
 			
 			background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
 			background-position: center; /* Centra la imagen de fondo */
@@ -358,32 +372,45 @@
 			
 			position: absolute;
 			top: 7%;
-			left: 5%;
+			left: 6%;
   		  display: flex;
   		  align-items: center; /* Alinea verticalmente */
   		  gap: 25px; /* Espacio entre imagen y texto */
 		}
 		.app1-opcion1 {
-			background-color: #d5d5d5;
+			background-color: #555;
 			width: 15px;
 			height: 15px;
 			border-radius: 15px;
 		}
 		.app1-opcion2 {
-			background-color: #d5d5d5;
+			background-color: #555;
 			width: 15px;
 			height: 15px;
 			border-radius: 15px;
 		}
+		
 		.app1-barra {
-			background-color: #d5d5d5;
-			width: 400px;
+			background-color: #555;
+			width: 320px;
 			height: 25px;
 			border-radius: 15px;
 			color: white;
 			font-size: 12px;
 			position: relative;
 			top: 50%;
+		}
+		.app1-opcion3 {
+			background-color: #555;
+			width: 15px;
+			height: 15px;
+			border-radius: 15px;
+		}
+		.app1-opcion4 {
+			background-color: #555;
+			width: 15px;
+			height: 15px;
+			border-radius: 15px;
 		}
 		/*
 		.app1-explorer2 {
@@ -497,7 +524,46 @@
 							       transform: translateX(12px);
 								   background: #f1f1f1;
 							   }
-					 
+					
+					
+					
+					/**
+					color claro f1f1f1
+					color oscuro 555555
+					
+					*/ 
+					
+					
+					/*iconos escritorio*/
+					.icono {
+						
+					}
+					.icono p {
+						color: white;
+						position: absolute;
+						bottom: -15px;
+						font-size: 12px;
+						left: 33px;
+						text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+						text-align: center;
+					}
+					/*icono carpeta amarilla*/
+					#icono-carpeta-amarilla {
+						transition: background-color 0.5s ease;
+						position: absolute;
+						width: 25px;
+					}
+					/*icono musica*/
+					#icono-musica {
+						transition: background-color 0.5s ease;
+						position: absolute;
+						width: 25px;
+					}
+					#icono-imagen {
+						transition: background-color 0.5s ease;
+						position: absolute;
+						width: 25px;
+					}
     </style>
 </head>
 <body>
@@ -573,14 +639,21 @@
 </div>
 
 <!-- Ventanas -->
+<!-- virgen -->
 <div id="app1" class="window">
 	<p>App 1</p>
 	<div class="app1-explorer">
 		<div class="app1-opcion1"></div>
 		<div class="app1-opcion2"></div>
 		<div class="app1-barra"></div>
+		<div class="app1-opcion3"></div>
+		<div class="app1-opcion4"></div>
 	</div>
-	
+<!--
+	<div id="app1" class="window">
+		<p>App 1</p>
+	</div>
+-->	
 	<!--
 	<div class="">
 		<div class="explorer-left">
@@ -635,8 +708,8 @@
 <div id="app2" class="window">
 	<p>App 2</p>
 	<div class="app2-browser">
-		<div class="app2-opcion"></div>
 		<div class="app2-barra"></div>
+		<div class="app2-opcion"></div>
 	</div>
 </div>
 <!--
@@ -677,10 +750,18 @@
 	</div>
 		-->
 </div>
+<!--<div id="icono-carpeta-amarilla" class="icono"><img src="icono-carpeta-amarilla.png"><p>Folder</p></div>
+-->
+<!--<div id="icono-musica" class="icono"><img src="icono-musica.png"><p>Music</p></div>
+<div id="icono-imagen" class="icono"><img src="icono-imagen.png"><p>Photo</p></div>
+-->
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dockItems = document.querySelectorAll('.dock-item');
         const windows = document.querySelectorAll('.window');
+		const icons = document.querySelectorAll('.icono');
         //const closeButtons = document.querySelectorAll('.close-button');
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -717,21 +798,7 @@
 		        win.style.display = 'none'; // Hide the current window on double-click
 		    });
 		});
-/**
-		//minimizar ventanas con doble clikc sobre la ventana con efecto 
-		windows.forEach(win => {
-		            win.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-            
-		            win.addEventListener('dblclick', function() {
-		                win.style.opacity = '0';
-		                win.style.transform = 'scale(0.9)';
-                
-		                setTimeout(() => {
-		                    win.style.display = 'none';
-		                }, 300); // Esperar el tiempo de la transición antes de ocultar completamente
-		            });
-		        });
-		*/
+
 /**		
     document.body.addEventListener("dblclick", function(event) {
         if (event.target === document.body) {
@@ -770,6 +837,8 @@
 		        document.addEventListener('pointermove', onPointerMove);
 		        document.addEventListener('pointerup', onPointerUp);
 		    });
+			
+			
 
 		    function onPointerMove(event) {
 		        if (dragWindow) {
@@ -906,6 +975,17 @@
 			    let circle = this.querySelector(".circle");
 			    circle.classList.toggle("active");
 			});
+			
+			
+			
+			
+			
+			
+			
+			// Arrastrar iconos de escritorio con Pointer Events
+	   
+			
+	    
 </script>
 </body>
 </html>

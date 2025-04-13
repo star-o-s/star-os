@@ -14,7 +14,7 @@
             align-items: center;
             justify-content: center;
             background-color: #f0f0f0;
-			background-image: url('nenad-novakovic-xuZTzyXCbTw-unsplash.jpg'); /* URL de la imagen de fondo */
+			background-image: url('bailey-zindel-NRQV-hBF10M-unsplash.jpg'); /* URL de la imagen de fondo */
 			background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
 			background-position: center; /* Centra la imagen de fondo */
 			background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -538,6 +538,9 @@
 					.icono {
 						
 					}
+					.icono img {
+						width: 124px;
+					}
 					.icono p {
 						color: white;
 						position: absolute;
@@ -734,11 +737,11 @@
 		</button>
 	 </div>
 	</div>
-	<!--
+
 	<div class="paperbin">
 		<img src="bin.png">
 	</div>
-	
+	<!--
 	<div class="phone">
 		<img src="phone.png">
 	</div>
@@ -749,9 +752,8 @@
 		<img src="contact.png">
 	</div>
 		-->
-</div>
-<!--<div id="icono-carpeta-amarilla" class="icono"><img src="icono-carpeta-amarilla.png"><p>Folder</p></div>
--->
+</div><!--
+<div id="icono-carpeta-amarilla" class="icono"><img src="logo-explorer.png"><p>Explorer</p></div>
 <!--<div id="icono-musica" class="icono"><img src="icono-musica.png"><p>Music</p></div>
 <div id="icono-imagen" class="icono"><img src="icono-imagen.png"><p>Photo</p></div>
 -->
@@ -761,7 +763,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const dockItems = document.querySelectorAll('.dock-item');
         const windows = document.querySelectorAll('.window');
-		const icons = document.querySelectorAll('.icono');
+		const icon = document.querySelectorAll('.icono');
         //const closeButtons = document.querySelectorAll('.close-button');
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -983,7 +985,6 @@
 			
 			
 			// Arrastrar iconos de escritorio con Pointer Events
-	   
 			
 	    
 </script>

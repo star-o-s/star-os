@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star - Operating System Concept</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+			background-image: url('sebastian-svenson-LpbyDENbQQg-unsplash.jpg'); /* URL de la imagen de fondo */
+			background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+			background-position: center; /* Centra la imagen de fondo */
+			background-repeat: no-repeat; /* Evita que la imagen se repita */
+			font-family: Arial, sans-serif;
+			/*cursor: url('cursor.png'), auto;*/
+        }
+
+        .dock {
+            position: fixed;
+            top: 10px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+			/*background: linear-gradient(to right, rgba(0, 161, 254, 0.5), rgba(201, 27, 224, 0.5), rgba(237, 35, 13, 0.5), rgba(238, 220, 10, 0.5), rgba(96, 216, 56, 0.5)); /* Degradado con transparencia */
+			height:30px;
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+			width: 85%;
+        }
+
+        .dock-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: -30px 10px;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+			
+        }
+
+        .dock-item img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .dock-item span {
+            margin-top: 8px;
+            font-size: 14px;
+            opacity: 0;
+			text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+        }
+
+        .dock-item:hover img {
+            transform: scale(1.2);
+		    transition: transform 0.3s ease-in-out;
+        }
+
+        .dock-item:hover span {
+            opacity: 1;
+        }
+		
+        .dock.active {
+            background: rgba(25, 25, 25, 0.3); /* Dark */
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+        }
+		
+        .window {
+            position: absolute;
+            width: 550px;
+			height:350px;
+            background: #f1f1f1;
+            border-radius: 20px;
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1000;
+            overflow: hidden;
+			
+			transition: background-color 0.5s ease;
+        }
+		
+		.window p {
+			color: #505050;
+			text-align: center;
+			display: none;
+			font-size: 12px;
+			 font-weight: bold;
+		}
+		
+        .window.active {
+            background-color: #555; /* Dark */
+        }
+		
+		
+		.bar {
+            position: fixed;
+            bottom: 10px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            /*padding: 10px;*/
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+			/*background: linear-gradient(to right, rgba(0, 161, 254, 0.5), rgba(201, 27, 224, 0.5), rgba(237, 35, 13, 0.5), rgba(238, 220, 10, 0.5), rgba(96, 216, 56, 0.5)); /* Degradado con transparencia */
+			height:32px;
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+			width:50%;
+			border-radius: 10px;
+		}
+		
+        .bar.active {
+            background: rgba(25, 25, 25, 0.3); /* Dark */
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+        }
+		
+		.clock {
+			font-size: 0.8em;
+			color: #fff;
+			position: absolute;
+			text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); /* Ajusta la sombra según sea necesario */
+			left: 25px;
+			bottom: 8px;
+		}
+		
+		.settings {
+			position: absolute;
+			right: 25px;
+			bottom: 2px;
+		}
+		
+		.settings img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		.contactme {
+			position: absolute;
+			right: 185px;
+			bottom: 2px;
+		}
+		
+		.contactme img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		.phone {
+			position: absolute;
+			right: 105px;
+			bottom: 2px;
+		}
+		
+		.phone img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		.mail {
+			position: absolute;
+			right: 145px;
+			bottom: 2px;
+		}
+		
+		.mail img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		.paperbin {
+			position: absolute;
+			right: 65px;
+			bottom: 2px;
+		}
+		
+		.paperbin img {
+			width: 20px;
+			height: 20px;
+		}
+		
+		
+		
+		#app1 {
+	        width: 550px;  /* Ancho del cuadrado */
+	        height: 350px; /* Altura del cuadrado */
+	       /* background: linear-gradient(to right, #393939 0%, #393939 25%, rgba(57, 57, 57, 0.25) 25%);*/
+			/*background: linear-gradient(to right, #f1f1f1 0%, #f1f1f1 25%, rgba(85, 85, 85, 1) 25%);*/
+			background-color: rgba(85, 85, 85, 0.6);
+			position: absolute; /* Necesario para moverlo */
+			text-align: center;
+			border-radius: 25px; /* Radio de las esquinas redondeadas */
+			box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Sombra */
+			z-index: 0; /* Asegura que el elemento esté encima de otros elementos */
+			transition: transform 0.5s ease-out, opacity 0.5s ease-out, width 0.5s, height 0.5s; /* Transición para suavizar el cambio */
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */		
+	    }
+		#app1.active {
+			/*background: linear-gradient(to right, #555555 0%, #555555 25%, rgba(241, 241, 241, 1) 25%);*/
+			background-color: rgba(241, 241, 241, 0.6);
+		}
+		
+		
+		 
+		
+		  
+		
+		
+		
+		
+		
+		#app2 {
+	        width: 795px;  /* Ancho del cuadrado */
+	        height: 485px; /* Altura del cuadrado */
+	        /*background: linear-gradient(to right, #fff 0%, #fff 25%, rgba(255, 255, 255, 0.25) 25%);*/
+			position: absolute; /* Necesario para moverlo */
+			text-align: center;
+			border-radius: 25px; /* Radio de las esquinas redondeadas */
+			box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Sombra */
+			z-index: 0; /* Asegura que el elemento esté encima de otros elementos */
+			transition: transform 0.5s ease-out, opacity 0.5s ease-out, width 0.5s, height 0.5s; /* Transición para suavizar el cambio */
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */		
+            
+            overflow: hidden;
+			background-image: url('browser-lion.pn');
+			
+			background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+			background-position: center; /* Centra la imagen de fondo */
+			background-repeat: no-repeat; /* Evita que la imagen se repita */
+		}
+		
+		.explorer-left {
+			text-align: left;
+			color: #929292;
+			font-size: 11px;
+			margin: 15px;
+			width: 100px;
+			display: flex;
+			  flex-direction: column;
+			  gap: 10px; /* Espacio entre filas */
+			  padding: 0px;
+  			position: relative;
+  			  top: 8px;   /* Mueve el div hacia abajo */
+		}
+		.explorer-left img {
+			width: 20px;
+			height: 20px;
+			 
+		}
+		.explorer-left div:hover {
+			background-color: #D5D5D5;
+			color: #929292;
+			padding: 5px 115px 5px 5px;
+			border-radius: 8px; /* Radio de las esquinas redondeadas */
+		}
+
+		.explorer-left div {
+		  display: flex;
+		  align-items: center; /* Alinea verticalmente */
+		  gap: 10px; /* Espacio entre imagen y texto */
+		  padding: 5px;
+		}
+		.explorer-right {
+			position: relative;
+			  top: -170px;   /* Mueve el div hacia abajo */
+			  left: 165px;  /* Mueve el div hacia la derecha */
+			color: #929292;
+			font-size: 9px;
+  		  display: flex;
+  		  align-items: center; /* Alinea verticalmente */
+  		  /*gap: 10px; /* Espacio entre imagen y texto */
+			text-align: center;
+	  	  
+		}
+		
+		.explorer-right img {
+			width: 26px;
+			display: block;
+			  margin: 9px; /* Centrar la imagen */
+			 
+			  
+		}
+		.explorer-right div {
+			padding: 6px;
+		}
+		
+		.explorer-right .seleccion:hover {
+			background-color: #D5D5D5;
+			color: #929292;
+			padding: 6px;
+			border-radius: 8px; /* Radio de las esquinas redondeadas */
+			
+		}
+		/*
+		.explorer-search {
+			background-color: #d5d5d5;
+			width: 120px;
+			height: 22px;
+			color: #fff;
+			position: relative;
+			  top: 10px;   /* Mueve el div hacia abajo */
+		/*	  left: 165px;  /* Mueve el div hacia la derecha */
+		/*	  border-radius: 8px; /* Radio de las esquinas redondeadas */
+		/*	  font-size: 12px;
+			  padding: 4px;
+	  		  display: flex;
+	  		  align-items: center; /* Alinea verticalmente */
+	  		  /*gap: 10px; /* Espacio entre imagen y texto */
+		/*		text-align: left;
+				
+			
+		}*/
+		.explorer-search img {
+			width: 26px;
+			position: relative;
+			  top: 52px;   /* Mueve el div hacia abajo */
+			  left: 235px;  /* Mueve el div hacia la derecha */
+		}
+		.explorer-tab img {
+			width: 26px;
+			position: relative;
+			  top: 52px;   /* Mueve el div hacia abajo */
+			  left: 235px;  /* Mueve el div hacia la derecha */
+		}
+		.explorer-option {
+			position: relative;
+			  top: 52px;   /* Mueve el div hacia abajo */
+			  left: -200px;  /* Mueve el div hacia la derecha */
+		}
+		.explorer-option img {
+			width: 26px;
+		}
+		.bar-search {
+			background-color: #d5d5d5;
+			width: 225px;
+			height: 22px;
+			color: #f1f1f1;
+			position: relative;
+			  top: 20px;   /* Mueve el div hacia abajo */
+			  left: 160px;  /* Mueve el div hacia la derecha */
+			  border-radius: 8px; /* Radio de las esquinas redondeadas */
+			  font-size: 12px;
+			  padding: 3px;
+	  		  display: flex;
+	  		  align-items: center; /* Alinea verticalmente */
+	  		  /*gap: 10px; /* Espacio entre imagen y texto */
+				
+		}
+		
+        .minimized {
+            transform: scale(0);
+            opacity: 0;
+        }
+	
+		.app1-explorer {
+			
+			position: absolute;
+			top: 7%;
+			left: 6%;
+  		  display: flex;
+  		  align-items: center; /* Alinea verticalmente */
+  		  gap: 25px; /* Espacio entre imagen y texto */
+		}
+		.app1-opcion1 {
+			background-color: #555;
+			width: 15px;
+			height: 15px;
+			border-radius: 15px;
+		}
+		.app1-opcion2 {
+			background-color: #555;
+			width: 15px;
+			height: 15px;
+			border-radius: 15px;
+		}
+		
+		.app1-barra {
+			background-color: #555;
+			width: 320px;
+			height: 25px;
+			border-radius: 15px;
+			color: white;
+			font-size: 12px;
+			position: relative;
+			top: 50%;
+		}
+		.app1-opcion3 {
+			background-color: #555;
+			width: 15px;
+			height: 15px;
+			border-radius: 15px;
+		}
+		.app1-opcion4 {
+			background-color: #555;
+			width: 15px;
+			height: 15px;
+			border-radius: 15px;
+		}
+		/*
+		.app1-explorer2 {
+			
+			position: absolute;
+			top: 25%;
+			left: 5%;
+  		  display: flex;
+  		  align-items: center; /* Alinea verticalmente */
+  	/*	  gap: 25px; /* Espacio entre imagen y texto */
+	/*	}
+		.app1-icono1 {
+			background-color: #d5d5d5;
+			width: 35px;
+			height: 45px;
+			border-radius: 8px;
+		}
+		.app1-icono2 {
+			background-color: #d5d5d5;
+			width: 35px;
+			height: 45px;
+			border-radius: 8px;
+		}
+		.app1-icno3 {
+			background-color: #d5d5d5;
+			width: 35px;
+			height: 45px;
+			border-radius: 8px;
+		}
+		*/
+		.app2-browser {
+			
+			position: absolute;
+			top: 45%;
+			left: 15%;
+  		  display: flex;
+  		  align-items: center; /* Alinea verticalmente */
+  		  gap: 25px; /* Espacio entre imagen y texto */
+		}
+		.app2-opcion {
+			background-color: #d5d5d5;
+			width: 25px;
+			height: 25px;
+			border-radius: 15px;
+			top: 5%;
+		}
+		.app2-barra {
+			background-color: #d5d5d5;
+			width: 520px;
+			height: 35px;
+			border-radius: 15px;
+		}
+		
+		#toggleDiv {
+		            display: none;
+		            margin-top: 20px;
+		            padding: 20px;
+		            background-color: lightgray;
+		            border-radius: 5px;
+					position: absolute;
+					  bottom: 50px;   /* Mueve el div hacia abajo */
+					  right: 5px;  /* Mueve el div hacia la derecha */
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+			backdrop-filter: blur(5px); /* Desenfoque del fondo */
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+		        }
+				#toggleDiv.active {
+					background: rgba(25, 25, 25, 0.3);
+				}
+				
+		        button {
+		            padding: 1px 1px;
+		            font-size: 16px;
+		            border: none;
+		            border-radius: 10px;
+		            background-color: #f1f1f1;
+		            color: white;
+		            cursor: pointer;
+		            transition: background-color 0.3s;
+					width: 28px;
+					height: 16px;
+					
+					
+		        }
+		       
+				
+			    .button-active {
+			               background-color: #646464;
+						   
+			               /*transform: translateY(15px);*/
+			           }
+					   .circle {
+					               width: 12px;
+					               height: 12px;
+					               background: #646464;
+					               border-radius: 50%;
+					               position: absolute;
+					               left: 1px;
+								   top: 0px;
+					               
+					               
+					               
+					               
+					               position: relative; /* Importante para que el transform funcione */
+					               transition: transform 0.3s ease-in-out;
+					           }
+							   
+							   .circle.active {
+							       transform: translateX(12px);
+								   background: #f1f1f1;
+							   }
+					
+					
+					
+					/**
+					color claro f1f1f1
+					color oscuro 555555
+					
+					*/ 
+					
+					
+					/*iconos escritorio*/
+					.icono {
+						
+					}
+					.icono img {
+						width: 124px;
+					}
+					.icono p {
+						color: white;
+						position: absolute;
+						bottom: -15px;
+						font-size: 12px;
+						left: 33px;
+						text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+						text-align: center;
+					}
+					/*icono carpeta amarilla*/
+					#icono-carpeta-amarilla {
+						transition: background-color 0.5s ease;
+						position: absolute;
+						width: 25px;
+					}
+					/*icono musica*/
+					#icono-musica {
+						transition: background-color 0.5s ease;
+						position: absolute;
+						width: 25px;
+					}
+					#icono-imagen {
+						transition: background-color 0.5s ease;
+						position: absolute;
+						width: 25px;
+					}
+    </style>
+</head>
+<body>
+<div class="dock">
+    <div class="dock-item" data-window="app1">
+        <img src="icon1.png" alt="App 1">
+		<span>App 1</span>
+    </div>
+    <div class="dock-item" data-window="app2">
+        <img src="icon2.png" alt="App 2">
+		<span>App 2</span>
+    </div>
+    <div class="dock-item" data-window="app3">
+        <img src="icon3.png" alt="App 3">
+		<span>App 3</span>
+    </div>
+    <div class="dock-item" data-window="app4">
+        <img src="icon4.png" alt="App 4">
+		<span>App 4</span>
+    </div>
+    <div class="dock-item" data-window="app5">
+        <img src="icon5.png" alt="App 5">
+		<span>App 5</span>
+    </div>
+    <div class="dock-item" data-window="app6">
+        <img src="icon6.png" alt="App 6">
+		<span>App 6</span>
+    </div>
+    <div class="dock-item" data-window="app7">
+        <img src="icon7.png" alt="App 7">
+		<span>App 7</span>
+    </div>
+    <div class="dock-item" data-window="app8">
+        <img src="icon8.png" alt="App 8">
+		<span>App 8</span>
+    </div>
+    <div class="dock-item" data-window="app9">
+        <img src="icon9.png" alt="App 9">
+		<span>App 9</span>
+    </div>
+    <div class="dock-item" data-window="app10">
+        <img src="icon10.png" alt="App 10">
+		<span>App 10</span>
+    </div>
+    <div class="dock-item" data-window="app11">
+        <img src="icon11.png" alt="App 11">
+		<span>App 11</span>
+    </div>
+    <div class="dock-item" data-window="app12">
+        <img src="icon12.png" alt="App 12">
+		<span>App 12</span>
+    </div>
+    <div class="dock-item" data-window="app13">
+        <img src="icon13.png" alt="App 13">
+		<span>App 13</span>
+    </div>
+    <div class="dock-item" data-window="app14">
+        <img src="icon14.png" alt="App 14">
+		<span>App 14</span>
+    </div>
+    <div class="dock-item" data-window="app15">
+        <img src="icon15.png" alt="App 15">
+		<span>App 15</span>
+    </div>
+    <div class="dock-item" data-window="app16">
+        <img src="icon16.png" alt="App 16">
+		<span>App 16</span>
+    </div>
+    <div class="dock-item" data-window="app17">
+        <img src="icon17.png" alt="App 17">
+		<span>App 17</span>
+    </div>
+</div>
+
+<!-- Ventanas -->
+<!-- virgen -->
+<div id="app1" class="window">
+	<p>App 1</p>
+	<div class="app1-explorer">
+		<div class="app1-opcion1"></div>
+		<div class="app1-opcion2"></div>
+		<div class="app1-barra"></div>
+		<div class="app1-opcion3"></div>
+		<div class="app1-opcion4"></div>
+	</div>
+<!--
+	<div id="app1" class="window">
+		<p>App 1</p>
+	</div>
+-->	
+	<!--
+	<div class="">
+		<div class="explorer-left">
+			<div class="download"><img src="explorer-icono-all-blue.png">All</div>
+			<div class="images"><img src="explorer-icono-images-blue.png">Images</div>
+			<div class="video"><img src="explorer-icono-video-blue.png">Video</div>
+			<div class="music"><img src="explorer-icono-music-blue.png">Music</div>
+		</div>
+		<div class="explorer-right">
+			<div class="archivo">
+				<div class="seleccion">
+					<img src="icono-music-blue2.png">Lady Gaga
+				</div>
+			</div>
+			<div class="archivo">
+				<div class="seleccion">
+					<img src="icono-music-blue2.png">Katy Perry
+				</div>
+			</div>
+			<div class="archivo">
+				<div class="seleccion">
+					<img src="icono-music-blue2.png">Bruno Mars
+				</div>
+			</div>
+			<div class="archivo">
+				<div class="seleccion">
+					<img src="icono-music-blue2.png">Rihanna
+				</div>
+			</div>
+			<div class="archivo">
+				<div class="seleccion">
+					<img src="icono-music-blue2.png">Beyoncé
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="explorer-option">
+		<img src="icono-atras.png">
+		<img src="icono-delante.png">
+		
+		<img src="tab.png">
+		<img src="search.png">
+	</div>
+		-->
+	<!--<div class="bar-search"></div>-->
+	<!--<div class="explorer-search"><img src="search.png"></div>
+	<div class="explorer-tab"><img src=tab.png></div>-->
+		
+</div>
+
+<div id="app2" class="window">
+	<p>App 2</p>
+	<div class="app2-browser">
+		<div class="app2-barra"></div>
+		<div class="app2-opcion"></div>
+	</div>
+</div>
+<!--
+<div id="app3" class="window">
+	<p>App 3</p>
+</div>
+
+<div id="app4" class="window">
+	<p>App 4</p>
+</div>
+-->
+<!-- Barra -->
+<div class="bar">
+	<div class="clock" id="clock"></div>
+	<div class="options">
+	<div class="settings" onclick="toggleDiv()">
+	        <img src="setting.png">
+	    </div>
+	 <div id="toggleDiv">
+	 	<button id="colorButton">
+			<div class="circle"></div>
+		</button>
+	 </div>
+	</div>
+
+	<div class="paperbin">
+		<img src="bin.png">
+	</div>
+	
+	<div class="phone">
+		<img src="phone.png">
+	</div>
+	<div class="mail">
+		<img src="mail.png">
+	</div>
+	<div class="contactme">
+		<img src="contact.png">
+	</div>
+		
+</div><!--
+<div id="icono-carpeta-amarilla" class="icono"><img src="logo-explorer.png"><p>Explorer</p></div>
+<div id="icono-musica" class="icono"><img src="icono-musica.png"><p>Music</p></div>
+<div id="icono-imagen" class="icono"><img src="icono-imagen.png"><p>Photo</p></div>
+-->
+	
+<!--WIDGET-->
+	
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dockItems = document.querySelectorAll('.dock-item');
+        const windows = document.querySelectorAll('.window');
+		const icon = document.querySelectorAll('.icono');
+        //const closeButtons = document.querySelectorAll('.close-button');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+		
+		windows.forEach(win => {
+		        win.addEventListener('click', function() {
+		            // Incrementar el z-index y aplicarlo a la ventana seleccionada
+		            highestZIndex++;
+		            win.style.zIndex = highestZIndex;
+		        });
+		    });
+
+        let dragWindow = null;
+        let offsetX = 0;
+        let offsetY = 0;
+		let highestZIndex = 1000; // Puedes empezar desde 1000 o cualquier otro valor alto
+
+        // Mostrar ventana al hacer clic en el ícono del dock
+        dockItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-window');
+                const targetWindow = document.getElementById(targetId);
+                targetWindow.style.display = 'block'; // Mostrar la ventana correspondiente
+				
+            });
+        });
+
+		
+
+
+        // Minimizar ventana con doble click sobre la ventana
+		windows.forEach(win => {
+		    win.addEventListener('dblclick', function() {
+		        win.style.display = 'none'; // Hide the current window on double-click
+		    });
+		});
+
+/**		
+    document.body.addEventListener("dblclick", function(event) {
+        if (event.target === document.body) {
+            document.querySelectorAll(".window").forEach(div => {
+                div.classList.toggle("minimized");
+            });
+        }
+	
+    });
+*/
+	
+		
+	
+		
+		
+		
+		
+		
+		
+		
+
+		// Arrastrar ventanas con Pointer Events
+		windows.forEach(win => {
+		    // Eliminar selección de .window-header y agregar eventos directamente a la ventana .window
+
+		    win.addEventListener('pointerdown', function(event) {
+		        event.preventDefault(); // Prevenir comportamiento por defecto que pueda causar problemas
+
+		        dragWindow = win;
+
+		        // Calcular el offset en el momento exacto en que se comienza a arrastrar
+		        const rect = win.getBoundingClientRect();
+		        offsetX = event.clientX - rect.left;
+		        offsetY = event.clientY - rect.top;
+
+		        document.addEventListener('pointermove', onPointerMove);
+		        document.addEventListener('pointerup', onPointerUp);
+		    });
+			
+			
+
+		    function onPointerMove(event) {
+		        if (dragWindow) {
+		            // Calcular nueva posición
+		            const newLeft = event.clientX - offsetX;
+		            const newTop = event.clientY - offsetY;
+
+		            // Aplicar nueva posición
+		            dragWindow.style.left = `${newLeft}px`;
+		            dragWindow.style.top = `${newTop}px`;
+		        }
+		    }
+
+		    function onPointerUp() {
+		        if (dragWindow) {
+		            dragWindow = null;
+		            document.removeEventListener('pointermove', onPointerMove);
+		            document.removeEventListener('pointerup', onPointerUp);
+		        }
+		    }
+		});
+		
+		
+
+        // Detectar el uso de dos dedos en el panel táctil para ajustar tamaño de ventanas
+        windows.forEach(win => {
+            let initialTouchY = null;
+
+            win.addEventListener('touchstart', function(event) {
+                if (event.touches.length === 2) {
+                    initialTouchY = Math.min(event.touches[0].clientY, event.touches[1].clientY);
+                }
+            });
+
+            win.addEventListener('touchmove', function(event) {
+                if (event.touches.length === 2 && initialTouchY !== null) {
+                    let currentTouchY = Math.min(event.touches[0].clientY, event.touches[1].clientY);
+                    if (currentTouchY > initialTouchY + 30) { // Ajusta el umbral según sea necesario
+                        // Aquí puedes realizar acciones adicionales como cambiar el tamaño de la ventana
+                        console.log("Deslizar hacia arriba con dos dedos detectado.");
+                        initialTouchY = null;
+                    }
+                }
+            });
+
+            win.addEventListener('touchend', function(event) {
+                if (event.touches.length < 2) {
+                    initialTouchY = null;
+                }
+            });
+        });
+		
+		
+		
+        // Parámetros del círculo
+        const radius = 300; // Radio del círculo
+        const centerX = window.innerWidth / 2; // Centro del círculo en el eje X
+        const centerY = window.innerHeight / 2; // Centro del círculo en el eje Y
+        const totalWindows = dockItems.length;
+
+        dockItems.forEach((item, index) => {
+            item.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-window');
+                const targetWindow = document.getElementById(targetId);
+
+                // Calcular la posición en el círculo
+                const angle = (index / totalWindows) * 2 * Math.PI; // Ángulo para cada ventana
+                const left = centerX + radius * Math.cos(angle) - targetWindow.offsetWidth / 2;
+                const top = centerY + radius * Math.sin(angle) - targetWindow.offsetHeight / 2;
+
+                // Mostrar la ventana en la posición calculada
+                targetWindow.style.display = 'block';
+                targetWindow.style.left = `${left}px`;
+                targetWindow.style.top = `${top}px`;
+            });
+        });
+		
+		
+		
+		// Reloj
+ 		function mostrarFechaHora() {
+			const fechaElement = document.getElementById('clock');
+ 		    const opcionesFecha = {
+				weekday: 'short',  // Nombre completo del día de la semana
+				day: 'numeric',   // Día del mes
+				month: 'short',    // Nombre completo del mes
+				// year: 'numeric'   // Año en formato numérico
+ 		   };
+		   const opcionesHora = {
+			   hour: '2-digit',  // Hora en formato de dos dígitos
+			   minute: '2-digit', // Minuto en formato de dos dígitos
+ 			  //  second: '2-digit', // Segundo en formato de dos dígitos (opcional)
+			   hour12: false     // Usa el formato de 24 horas
+		   };
+		   const fechaActual = new Date();
+		   const fechaFormateada = fechaActual.toLocaleDateString('en-US', opcionesFecha);
+		   const horaFormateada = fechaActual.toLocaleTimeString('en-US', opcionesHora);
+		   fechaElement.textContent = `${fechaFormateada}, ${horaFormateada}`;
+		   }
+
+ 		  // Actualiza la fecha y hora cada segundo
+		   setInterval(mostrarFechaHora, 1000);
+		   // Inicializa la fecha y hora cuando la página se carga
+ 		  window.onload = mostrarFechaHora;  
+    });
+	
+	
+	//abre menu widget de configuracion
+	//widget settings
+	function toggleDiv() {
+	            var div = document.getElementById("toggleDiv");
+	            if (div.style.display === "none" || div.style.display === "") {
+	                div.style.display = "block";
+	            } else {
+	                div.style.display = "none";
+	            }
+	        }
+			
+			
+			
+			//cambiar de color dark-light
+	        const button = document.getElementById('colorButton');
+	        const boxes = document.querySelectorAll('.window, .dock, .bar, #toggleDiv');
+
+	        button.addEventListener('click', () => {
+	            boxes.forEach(box => {
+	                box.classList.toggle('active');
+	            });
+				button.classList.toggle('button-active'); // Cambia el color del botón
+	        });
+			
+			//movimiento de circle boton dark-light
+			document.getElementById("colorButton").addEventListener("click", function() {
+			    let circle = this.querySelector(".circle");
+			    circle.classList.toggle("active");
+			});
+			
+			
+			
+			
+			
+			
+			
+			// Arrastrar iconos de escritorio con Pointer Events
+			
+	    
+</script>
+</body>
+</html>

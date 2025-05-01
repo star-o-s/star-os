@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>starOs</title>
+    <title>starOs | Operating System Concept</title>
     <style>
         body, html {
             margin: 0;
@@ -30,7 +30,7 @@
             justify-content: center;
             padding: 10px;
             background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
             z-index: 2000;
 			/*background: linear-gradient(to right, rgba(0, 161, 254, 0.5), rgba(201, 27, 224, 0.5), rgba(237, 35, 13, 0.5), rgba(238, 220, 10, 0.5), rgba(96, 216, 56, 0.5)); /* Degradado con transparencia */
@@ -202,15 +202,16 @@
 	        height: 350px; /* Altura del cuadrado */
 	       /* background: linear-gradient(to right, #393939 0%, #393939 25%, rgba(57, 57, 57, 0.25) 25%);*/
 			/*background: linear-gradient(to right, #f1f1f1 0%, #f1f1f1 25%, rgba(85, 85, 85, 1) 25%);*/
-			background-color: rgba(0, 0, 0, 0.6);
+			background-color: rgba(240, 240, 240, 1);
 			position: absolute; /* Necesario para moverlo */
 			text-align: center;
-			border-radius: 25px; /* Radio de las esquinas redondeadas */
+			border-radius: 15px; /* Radio de las esquinas redondeadas */
 			box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Sombra */
 			z-index: 0; /* Asegura que el elemento esté encima de otros elementos */
 			transition: transform 0.5s ease-out, opacity 0.5s ease-out, width 0.5s, height 0.5s; /* Transición para suavizar el cambio */
 			backdrop-filter: blur(5px); /* Desenfoque del fondo */
-		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */		
+		    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */	
+			            z-index: 1000;	
 	    }
 		#app1.active {
 			/*background: linear-gradient(to right, #555555 0%, #555555 25%, rgba(241, 241, 241, 1) 25%);*/
@@ -370,79 +371,8 @@
             opacity: 0;
         }
 	
-		.app1-explorer {
-			
-			position: absolute;
-			top: 7%;
-			left: 6%;
-  		  display: flex;
-  		  align-items: center; /* Alinea verticalmente */
-  		  gap: 25px; /* Espacio entre imagen y texto */
-		}
-		.app1-opcion1 {
-			background-color: #000;
-			width: 15px;
-			height: 15px;
-			border-radius: 15px;
-		}
-		.app1-opcion2 {
-			background-color: #000;
-			width: 15px;
-			height: 15px;
-			border-radius: 15px;
-		}
 		
-		.app1-barra {
-			background-color: #000;
-			width: 320px;
-			height: 25px;
-			border-radius: 15px;
-			color: white;
-			font-size: 12px;
-			position: relative;
-			top: 50%;
-		}
-		.app1-opcion3 {
-			background-color: #000;
-			width: 15px;
-			height: 15px;
-			border-radius: 15px;
-		}
-		.app1-opcion4 {
-			background-color: #000;
-			width: 15px;
-			height: 15px;
-			border-radius: 15px;
-		}
-		/*
-		.app1-explorer2 {
-			
-			position: absolute;
-			top: 25%;
-			left: 5%;
-  		  display: flex;
-  		  align-items: center; /* Alinea verticalmente */
-  	/*	  gap: 25px; /* Espacio entre imagen y texto */
-	/*	}
-		.app1-icono1 {
-			background-color: #d5d5d5;
-			width: 35px;
-			height: 45px;
-			border-radius: 8px;
-		}
-		.app1-icono2 {
-			background-color: #d5d5d5;
-			width: 35px;
-			height: 45px;
-			border-radius: 8px;
-		}
-		.app1-icno3 {
-			background-color: #d5d5d5;
-			width: 35px;
-			height: 45px;
-			border-radius: 8px;
-		}
-		*/
+		
 		.app2-browser {
 			
 			position: absolute;
@@ -569,6 +499,134 @@
 						position: absolute;
 						width: 25px;
 					}
+					
+					
+					
+					.widgets {
+						position: fixed;
+						top: 30%;
+						left: 38%;
+			            display: flex;
+			            align-items: flex-end;
+			            justify-content: center;
+					}
+					
+					
+			        #widget1 {
+			            position: absolute;
+			            top: 0px;
+						left: 0px;
+			            display: flex;
+			            align-items: flex-end;
+			            justify-content: center;
+			            padding: 10px;
+			            background: rgba(0, 0, 0, 0.3);
+			            border-radius: 15px;
+			            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+			            z-index: 0;
+						/*background: linear-gradient(to right, rgba(0, 161, 254, 0.5), rgba(201, 27, 224, 0.5), rgba(237, 35, 13, 0.5), rgba(238, 220, 10, 0.5), rgba(96, 216, 56, 0.5)); /* Degradado con transparencia */
+						backdrop-filter: blur(5px); /* Desenfoque del fondo */
+					    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+						width: 125px;
+						height: 125px;
+						background-image: url('note.png');
+						background-size: cover;        /* Ajusta la imagen para cubrir todo el div */
+						  background-position: center;   /* Centra la imagen */
+						  background-repeat: no-repeat;  /* Evita que se repita */
+			        }
+			        #widget2 {
+			            position: absolute;
+			            top: 0px;
+						left: 165px;
+			            display: flex;
+			            align-items: flex-end;
+			            justify-content: center;
+			            padding: 10px;
+			            background: rgba(0, 0, 0, 0.3);
+			            border-radius: 15px;
+			            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+			            z-index: 0;
+						/*background: linear-gradient(to right, rgba(0, 161, 254, 0.5), rgba(201, 27, 224, 0.5), rgba(237, 35, 13, 0.5), rgba(238, 220, 10, 0.5), rgba(96, 216, 56, 0.5)); /* Degradado con transparencia */
+						backdrop-filter: blur(5px); /* Desenfoque del fondo */
+					    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+						width: 175px;
+						height: 125px;
+						background-image: url('e.jpg');
+						background-size: cover;        /* Ajusta la imagen para cubrir todo el div */
+						  background-position: center;   /* Centra la imagen */
+						  background-repeat: no-repeat;  /* Evita que se repita */
+			        }
+				
+			        #widget3 {
+			            position: absolute;
+			            top: 165px;
+						left: -50px;
+			            display: flex;
+			            align-items: flex-end;
+			            justify-content: center;
+			            padding: 10px;
+			            background: rgba(255, 255, 255, 0.3);
+			            border-radius: 15px;
+			            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+			            z-index: 0;
+						/*background: linear-gradient(to right, rgba(0, 161, 254, 0.5), rgba(201, 27, 224, 0.5), rgba(237, 35, 13, 0.5), rgba(238, 220, 10, 0.5), rgba(96, 216, 56, 0.5)); /* Degradado con transparencia */
+						backdrop-filter: blur(5px); /* Desenfoque del fondo */
+					    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+						width: 175px;
+						height: 125px;
+						background-image: url('tiempo.png');
+						background-size: cover;        /* Ajusta la imagen para cubrir todo el div */
+						  background-position: center;   /* Centra la imagen */
+						  background-repeat: no-repeat;  /* Evita que se repita */
+			        }
+			        #widget4 {
+			            position: absolute;
+			            top: 165px;
+						left: 165px;
+			            display: flex;
+			            align-items: flex-end;
+			            justify-content: center;
+			            padding: 10px;
+			            background: rgba(255, 255, 255, 0.3);
+			            border-radius: 15px;
+			            box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+			            z-index: 0;
+						/*background: linear-gradient(to right, rgba(0, 161, 254, 0.5), rgba(201, 27, 224, 0.5), rgba(237, 35, 13, 0.5), rgba(238, 220, 10, 0.5), rgba(96, 216, 56, 0.5)); /* Degradado con transparencia */
+						backdrop-filter: blur(5px); /* Desenfoque del fondo */
+					    -webkit-backdrop-filter: blur(5px); /* Compatibilidad con Safari */
+						width: 125px;
+						height: 125px;
+			        }
+					
+					.widgetclock {
+						font-size: 45px;
+						position: absolute;
+						/*text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); /* Ajusta la sombra según sea necesario */
+						top: 50px;
+						background: linear-gradient(to right, #fff, #fff);
+						      -webkit-background-clip: text;
+						      -webkit-text-fill-color: transparent;
+							  z-index: 2000;
+						font-weight: bold;
+					}
+					.widgetclockseconds {
+						font-size: 120px;
+						top: 5px;
+						font-weight: ;
+						position: absolute;
+						/*text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); /* Ajusta la sombra según sea necesario */
+			            display: flex;
+			            align-items: center;
+			            justify-content: center;
+						/*background: linear-gradient(to right, #ddd, #ddd);
+						      -webkit-background-clip: text;
+						      -webkit-text-fill-color: transparent;
+							  z-index: 0;
+							  text-weight: bold;*/
+							  color: rgba(0, 0, 0, 0.1); /* Negro al 50% de opacidad */
+							  
+					}
+					
     </style>
 </head>
 <body>
@@ -645,15 +703,12 @@
 
 <!-- Ventanas -->
 <!-- virgen -->
+<!--
 <div id="app1" class="window">
 	<p>App 1</p>
-	<div class="app1-explorer">
-		<div class="app1-opcion1"></div>
-		<div class="app1-opcion2"></div>
-		<div class="app1-barra"></div>
-		<div class="app1-opcion3"></div>
-		<div class="app1-opcion4"></div>
+	
 	</div>
+	-->
 <!--
 	<div id="app1" class="window">
 		<p>App 1</p>
@@ -709,7 +764,7 @@
 	<div class="explorer-tab"><img src=tab.png></div>-->
 		
 </div>
-
+<!--
 <div id="app2" class="window">
 	<p>App 2</p>
 	<div class="app2-browser">
@@ -717,6 +772,7 @@
 		<div class="app2-opcion"></div>
 	</div>
 </div>
+-->
 <!--
 <div id="app3" class="window">
 	<p>App 3</p>
@@ -768,8 +824,20 @@
 -->
 	
 <!--WIDGET-->
-	
-
+<div class="widgets">
+	<div class="widget" id="widget1">
+		
+	</div>
+	<div class="widget" id="widget2">
+	</div>
+	<div class="widget" id="widget3">
+		
+	</div>
+	<div class="widget" id="widget4">
+		<div class="widgetclockseconds" id="widgetclockseconds"></div>
+		<div class="widgetclock" id="widgetclock"></div>
+	</div>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -958,6 +1026,64 @@
 		   // Inicializa la fecha y hora cuando la página se carga
  		  window.onload = mostrarFechaHora;  
     });
+	
+	
+	
+	
+	//ARRASTRAR WDIGETS
+	let selected = null;
+	  let offsetX = 0, offsetY = 0;
+
+	  document.querySelectorAll('.widget').forEach(div => {
+	    div.addEventListener('mousedown', (e) => {
+	      selected = div;
+	      offsetX = e.clientX - div.offsetLeft;
+	      offsetY = e.clientY - div.offsetTop;
+	      document.body.style.userSelect = "none";
+	    });
+	  });
+
+	  document.addEventListener('mousemove', (e) => {
+	    if (selected) {
+	      selected.style.left = (e.clientX - offsetX) + 'px';
+	      selected.style.top = (e.clientY - offsetY) + 'px';
+	    }
+	  });
+
+	  document.addEventListener('mouseup', () => {
+	    selected = null;
+	    document.body.style.userSelect = "";
+	  });
+	
+	
+	
+	
+	//RELOJ Y FECHA WIDGETS
+	function updateClock() {
+	      const now = new Date();
+	      const hours = String(now.getHours()).padStart(2, '0');
+	      const minutes = String(now.getMinutes()).padStart(2, '0');
+	      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+	      const day = String(now.getDate()).padStart(2, '0');
+	      const month = String(now.getMonth() + 1).padStart(2, '0'); // Mes comienza en 0
+	      const year = now.getFullYear();
+
+	      document.getElementById('widgetclock').textContent = `${hours}:${minutes}`;
+		  document.getElementById('widgetclockseconds').textContent = `${seconds}`;
+	      document.getElementById('widgetdate').textContent = `${day}/${month}/${year}`;
+	    }
+
+	    setInterval(updateClock, 1000);
+	    updateClock(); // Llamar una vez al cargar
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	
 	//abre menu widget de configuracion
